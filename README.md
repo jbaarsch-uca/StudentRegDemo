@@ -1,5 +1,5 @@
 This is a demonstration project used for CSCI 4325 Software Testing at the University of Central Arkansas.
-The purpose of this demonstration is to provide an environment for creating end-to-end tests using Selenium in a Container environment.
+The purpose of this demonstration is to provide an environment for creating end-to-end tests using Selenium in a container environment.
 
 The project requires Docker or Podman to run (I use Podman): https://podman-desktop.io/
 
