@@ -25,6 +25,9 @@ services:
     depends_on:
       - backend
       # depends_on ensures the listed services start before the current service.
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
 
   end2end-tests:
       build:

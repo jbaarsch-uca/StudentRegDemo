@@ -6,6 +6,8 @@ FROM node:25
 # 2. Set the working directory inside the container
 WORKDIR /app
 
+ENV PATH /app/node_modules/.bin:$PATH
+
 # 3. Copy only the package files first (for efficient caching)
 COPY package*.json ./
 
