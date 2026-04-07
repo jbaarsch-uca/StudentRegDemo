@@ -15,6 +15,9 @@ RUN npm install
 # 5. Copy the rest of your React code
 COPY . .
 
+# Set the path environment variable for Vite, because container isn't finding it.
+ENV PATH /app/node_modules/.bin:$PATH
+
 # 6. Expose Vite's default port
 EXPOSE 5173
 
