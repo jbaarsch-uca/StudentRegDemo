@@ -4,7 +4,7 @@ import {StudentRequest, StudentResponse} from '../types/student-reg-types';
 
 
 const StudentList = () => {
-    // State to store our courses
+    // State to store our students
     const [students, setStudents] = useState<StudentResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -41,7 +41,7 @@ const StudentList = () => {
                 gpa: numericGPA,
             });
         console.log("I saved the students--now, to update the fields.")
-        // refresh the list of courses
+        // refresh the list of students
         await loadStudents();
         //reset all the fields to clear the data
 
@@ -98,7 +98,7 @@ const StudentList = () => {
         loadStudents();
     }, []);
 
-    if (loading) return <div>Loading courses from Spring Boot...</div>;
+    if (loading) return <div>Loading students from Spring Boot...</div>;
     if (error) return <div style={{ color: 'red' }}>Error: {error}</div>;
 
 
