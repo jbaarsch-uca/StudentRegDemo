@@ -1,7 +1,8 @@
 package com.baarsch_bytes.studentRegDemo.controller;
-import com.baarsch_bytes.studentRegDemo.dto.CourseResponse;
+
 import com.baarsch_bytes.studentRegDemo.dto.StudentRequest;
 import com.baarsch_bytes.studentRegDemo.dto.StudentResponse;
+import com.baarsch_bytes.studentRegDemo.exception.NullStudentException;
 import com.baarsch_bytes.studentRegDemo.model.Course;
 import com.baarsch_bytes.studentRegDemo.model.Student;
 import com.baarsch_bytes.studentRegDemo.repository.CourseRepository;
@@ -110,7 +111,7 @@ public class StudentController {
     public ResponseEntity<Map<String, String>> update(@Valid
                 @RequestBody StudentRequest studentRequest,
                 @PathVariable Long id) {
-        Student student = repository.findById(id).get();
+        Student student = repository.findById(id).orElseThrow();
         student.setName(studentRequest.getName());
         student.setMajor(studentRequest.getMajor());
         student.setGpa(studentRequest.getGpa());
