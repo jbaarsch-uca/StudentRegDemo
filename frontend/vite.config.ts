@@ -26,6 +26,17 @@ export default defineConfig({
         allowedHosts: [
             "frontend"
         ]
+    },
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: './src/setupTests.ts',
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'html'],
+        include: ['src/components/**/*.tsx', 'src/services/**/*.ts'],
+        exclude: ['src/components/**/*.test.tsx', 'src/services/**/*.test.ts'],
+      }
     }
 })
 
