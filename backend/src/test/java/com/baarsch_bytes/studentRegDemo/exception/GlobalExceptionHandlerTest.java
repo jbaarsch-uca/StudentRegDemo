@@ -19,19 +19,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-// 1. Tell Spring to only load the web layer, and only for our DummyController
-@WebMvcTest(controllers = GlobalExceptionHandlerTest.DummyController.class)
-// 2. Explicitly import your GlobalExceptionHandler so Spring wires it up
-@Import(GlobalExceptionHandler.class)
-public class GlobalExceptionHandlerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
 
     // --- DUMMY COMPONENTS FOR ISOLATED TESTING ---
 
     @RestController
-    public static class DummyController {
+    class DummyController {
         // A fake endpoint that requires a valid DTO
         @PostMapping("/dummy-endpoint")
         public String dummyEndpoint(@Valid @RequestBody DummyDto dto) {
@@ -39,7 +31,7 @@ public class GlobalExceptionHandlerTest {
         }
     }
 
-    public static class DummyDto {
+    class DummyDto {
         // A fake validation rule with a specific message
         @NotBlank(message = "This test field cannot be left blank")
         private String testField;
@@ -48,7 +40,15 @@ public class GlobalExceptionHandlerTest {
         public void setTestField(String testField) { this.testField = testField; }
     }
 
-    // --- THE ACTUAL TEST ---
+
+// 1. Tell Spring to only load the web layer, and only for our DummyController
+@WebMvcTest(controllers = DummyController.class)
+// 2. Explicitly import your GlobalExceptionHandler so Spring wires it up
+@Import(GlobalExceptionHandler.class)
+public class GlobalExceptionHandlerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void handleValidationExceptions_ReturnsBadRequestWithFieldErrorsMap() throws Exception {
