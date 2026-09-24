@@ -151,4 +151,7 @@ public class CourseController {
         return course;
     }
 
+
+    // Useless comment
+
 }
